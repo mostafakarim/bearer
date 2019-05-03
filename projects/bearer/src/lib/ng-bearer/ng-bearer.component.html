@@ -1,4 +1,6 @@
-<ng-container *ngIf="!!policies; else buttonGetPolicies">
+<img src="https://app.bearer.sh/static/media/logo.5b35e2ab.svg" alt="Bearer">
+<br>
+<div *ngIf="!!policies; else buttonGetPolicies">
   <select #selectOption name="" id="">
     <option>Select an escalation policy</option>
     <option *ngFor="let policy of policies; let index = index" [value]="index">{{policy.summary}}</option>
@@ -7,7 +9,7 @@
   <button type="submit" (click)="saveSettings(selectOption.value)">save settings</button>
 
   <ng-send-test-event [referenceId]="referenceId"></ng-send-test-event>
-</ng-container>
+</div>
 
 <ng-template #buttonGetPolicies>
   <button type="submit" (click)="fetchEscalationPolicies()">Fetch escalation policies</button>

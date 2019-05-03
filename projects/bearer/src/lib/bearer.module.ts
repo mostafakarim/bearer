@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ConnexionComponent } from './connexion/connexion.component';
 import { CommonModule } from '@angular/common';
 import { NgBearerComponent } from './ng-bearer/ng-bearer.component';
 import { SendTestEventComponent } from './send-test-event/send-test-event.component';
@@ -8,7 +7,7 @@ import { SendTestEventComponent } from './send-test-event/send-test-event.compon
   imports: [
     CommonModule
   ],
-  declarations: [ConnexionComponent, NgBearerComponent, SendTestEventComponent],
+  declarations: [NgBearerComponent, SendTestEventComponent],
   exports: [NgBearerComponent]
 })
 export class BearerModule { }

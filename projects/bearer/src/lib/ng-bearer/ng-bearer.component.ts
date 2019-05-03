@@ -7,7 +7,6 @@ import Bearer from '@bearer/js/lib/cjs/lib/bearer';
 @Component({
   selector: 'ng-bearer',
   templateUrl: './ng-bearer.component.html',
-  styleUrls: ['./ng-bearer.component.css']
 })
 export class NgBearerComponent implements OnInit {
 
@@ -22,6 +21,7 @@ export class NgBearerComponent implements OnInit {
   ngOnInit() {
     this.bearerClient = bearer(this.config.BEARER_CLIENT_ID);
     this.bearerService.setConfig(this.config);
+    this.referenceId = this.config.REFERENCE_ID;
 
     this.fetchEscalationPolicies();
   }
@@ -32,24 +32,25 @@ export class NgBearerComponent implements OnInit {
         setupId: this.config.INTEGRATION_SETUP_ID
       }
     })
-      .then((result) => {
-        this.policies = result['data'];
+      .then(({ data }) => {
+        this.policies = data;
       })
       .catch(console.error);
   }
 
   saveSettings(selectedValue: number) {
-    this.referenceId = selectedValue.toString();
-    this.bearerClient.functionFetch(this.config.INTEGRATION_NAME, 'createIntegration', {
-      query: {
-        setupId: this.config.INTEGRATION_SETUP_ID,
-        referenceId: this.config.REFERENCE_ID
-      },
-      escalationPolicy: this.policies[selectedValue]
-    }).then(data => {
-      this.referenceId = data['referenceId'];
-    }).catch(console.error);
+    const policy = this.policies[selectedValue];
+    if (policy) {
+      this.referenceId = null;
+      this.bearerClient.functionFetch(this.config.INTEGRATION_NAME, 'createIntegration', {
+        query: {
+          setupId: this.config.INTEGRATION_SETUP_ID,
+          referenceId: this.referenceId
+        },
+        escalationPolicy: this.policies[selectedValue]
+      }).then(data => {
+        this.referenceId = data['referenceId'];
+      }).catch(console.error);
+    }
   }
-
-
 }

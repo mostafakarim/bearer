@@ -6,8 +6,7 @@ import bearer from '@bearer/js';
 
 @Component({
   selector: 'ng-send-test-event',
-  templateUrl: './send-test-event.component.html',
-  styleUrls: ['./send-test-event.component.css']
+  template: `<button type="submit" (click)="sendEvent()" [disabled]="!referenceId">send Event</button>`
 })
 export class SendTestEventComponent implements OnInit {
 
