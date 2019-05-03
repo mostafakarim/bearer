@@ -3,5 +3,8 @@
   "dest": "../../dist/bearer",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "@bearer/js"
+  ]
 }
