@@ -1,10 +1,15 @@
+
 import { Component } from '@angular/core';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'ld-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `
+    <ng-bearer [config]="environment.bearer"></ng-bearer>
+  `
 })
 export class AppComponent {
-  title = 'lib-demo';
+  environment = environment;
+  constructor() {
+  }
 }

@@ -1,0 +1,14 @@
+<ng-container *ngIf="!!policies; else buttonGetPolicies">
+  <select #selectOption name="" id="">
+    <option>Select an escalation policy</option>
+    <option *ngFor="let policy of policies; let index = index" [value]="index">{{policy.summary}}</option>
+  </select>
+
+  <button type="submit" (click)="saveSettings(selectOption.value)">save settings</button>
+
+  <ng-send-test-event [referenceId]="referenceId"></ng-send-test-event>
+</ng-container>
+
+<ng-template #buttonGetPolicies>
+  <button type="submit" (click)="fetchEscalationPolicies()">Fetch escalation policies</button>
+</ng-template>
